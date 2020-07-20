@@ -15,11 +15,11 @@ export default function Navigator() {
                 <Stack.Screen
                     name="Home"
                     component={Home}
-                    options={{ title: '' }} />
+                    options={{ title: 'Movies' }} />
                 <Stack.Screen
                     name="ReviewDetails"
                     component={ReviewDetails}
-                    options={{ title: '' }} />
+                    options={{ title: 'Movie Review' }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
