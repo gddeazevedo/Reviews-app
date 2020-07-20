@@ -11,7 +11,8 @@ export default function AboutStack() {
         <Stack.Navigator>
             <Stack.Screen
                 name="About"
-                component={About} />
+                component={About}
+                options={{ title: 'About' }} />
         </Stack.Navigator>
     );
 }
