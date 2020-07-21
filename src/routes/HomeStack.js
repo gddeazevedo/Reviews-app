@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home';
 import ReviewDetails from '../screens/ReviewDetails';
+import Header from '../shared/Header';
 
 
 const Stack = createStackNavigator();
@@ -13,21 +14,20 @@ export default function HomeStak() {
             <Stack.Screen
                 name="Home"
                 component={Home}
-                options={{
-                    title: 'Movies',
+                options={({ navigation }) => ({
+                    headerTitle: () => <Header title="GameZone" navigation={navigation} />,
                     headerStyle: {
-                        backgroundColor: '#eee',
-                        height: 60
-                    }
-                }} />
+                        backgroundColor: '#eee'
+                    },
+                    headerTitleAlign: 'center'
+                })} />
             <Stack.Screen
                 name="ReviewDetails"
                 component={ReviewDetails}
                 options={({ route }) => ({
                     title: `Review of ${route.params.title}`,
                     headerStyle: {
-                        backgroundColor: '#eee',
-                        height: 60
+                        backgroundColor: '#eee'
                     }
                 })} />
         </Stack.Navigator>
