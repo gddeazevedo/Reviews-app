@@ -5,10 +5,13 @@ import {
     FlatList,
     TouchableOpacity,
     StyleSheet,
-    Modal
+    Modal,
+    TouchableWithoutFeedback,
+    Keyboard
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Card from '../shared/Card';
+import ReviewForm from './ReviewForm';
 import { globalStyles } from '../styles/global';
 
 
@@ -22,6 +25,12 @@ export default function Home({ navigation }) {
 
     const toggle = () => setModal(!modal);
 
+    const addReview = review => {
+        review.key = Math.random().toString();
+        setReviews([review, ...reviews]);
+        toggle();
+    };
+
     const renderItem = ({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('ReviewDetails', item)}>
             <Card>
@@ -33,17 +42,19 @@ export default function Home({ navigation }) {
     return (
         <View style={globalStyles.container}>
             <Modal visible={modal} animationType="slide">
-                <View style={styles.modalContent}>
-                    <MaterialIcons
-                        name="close"
-                        size={24}
-                        style={{
-                            ...styles.modalToggle,
-                            ...styles.modalClose
-                        }}
-                        onPress={toggle} />
-                    <Text>Hello from Modal</Text>
-                </View>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={styles.modalContent}>
+                        <MaterialIcons
+                            name="close"
+                            size={24}
+                            style={{
+                                ...styles.modalToggle,
+                                ...styles.modalClose
+                            }}
+                            onPress={toggle} />
+                        <ReviewForm addReview={addReview} />
+                    </View>
+                </TouchableWithoutFeedback>
             </Modal>
 
             <MaterialIcons
